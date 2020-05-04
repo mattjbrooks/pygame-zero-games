@@ -4,6 +4,7 @@ player = Actor("player")
 player.x = 400 # How many pixels to the right player will appear
 player.y = 500 # How many pixels down player will appear
 player.jump = 30
+player.lives = 3
 
 cloud = Actor("cloud")
 cloud.pos = 1000, 100 # this is the same as setting cloud.x = 1000 and cloud.y = 100
@@ -22,20 +23,25 @@ def draw():
     grass.draw()
     fence.draw()
     player.draw()
-
+    screen.draw.text(str(player.lives), fontsize = 60, color = "red", topleft = (750, 10))
+    if player.lives == 0:
+        screen.draw.text("Game Over", fontsize = 100, color = "orange", center = (400, 300))
+    
 def update():
-    if keyboard.left:
-        player.x = player.x - 5 # a shorter way of writing this if you prefer is
-                                # player.x -= 5
-    elif keyboard.right:
-        player.x = player.x + 5 # a shorter way of writing this if you prefer is
-                                # player.x += 5
-    if keyboard.space: # not elif as we may want to move left or right and jump at same time
-        jump()
-    move_cloud()
-    move_fence()
-    move_grass()
-    game_gravity()
+    if player.lives > 0:
+        if keyboard.left:
+            player.x = player.x - 5 # a shorter way of writing this if you prefer is
+                                        # player.x -= 5
+        elif keyboard.right:
+            player.x = player.x + 5 # a shorter way of writing this if you prefer is
+                                        # player.x += 5
+        if keyboard.space: # not elif as we may want to move left or right and jump at same time
+            jump()
+        move_cloud()
+        move_fence()
+        move_grass()
+        game_gravity()
+        check_for_collision()
 
 def jump():
     # We're jumping!
@@ -69,5 +75,16 @@ def game_gravity():
     else:
         player.y = 500 # if player isn't in the air put them on the ground
         player.jump = 30 # now we're on the ground we can jump again at full power!
+
+def check_for_collision():
+    # if player has collided with the center of the fence and isn't a ghost
+    if player.collidepoint(fence.center) and player.image == "player":
+        player.lives = player.lives - 1
+        sounds.rumble.play()
+        player.image = "ghost" # change player's image to a transparent ghost
+        clock.schedule(change_back, 1) # schedule change_back to run 1 second from now
+
+def change_back():
+    player.image = "player"
 
 pgzrun.go() # If using Thonny in Pygame Zero Mode this line is unneeded
