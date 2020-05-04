@@ -5,6 +5,7 @@ player.x = 400 # How many pixels to the right player will appear
 player.y = 500 # How many pixels down player will appear
 player.jump = 30
 player.lives = 3
+player.score = 0
 
 cloud = Actor("cloud")
 cloud.pos = 1000, 100 # this is the same as setting cloud.x = 1000 and cloud.y = 100
@@ -15,6 +16,12 @@ fence.pos = 1000, 500
 grass = Actor("grass")
 grass.pos = 800, 525
 
+coin = Actor("coin")
+coin.pos = 40, 30
+
+heart = Actor("heart")
+heart.pos = 760, 30
+
 music.play("retrobeat")
 
 def draw():
@@ -22,8 +29,11 @@ def draw():
     cloud.draw()
     grass.draw()
     fence.draw()
+    coin.draw()
+    heart.draw()
     player.draw()
-    screen.draw.text(str(player.lives), fontsize = 60, color = "red", topleft = (750, 10))
+    screen.draw.text(str(player.score), fontsize = 60, color = "orange", topleft = (70, 10))
+    screen.draw.text(str(player.lives), fontsize = 60, color = "red", topleft = (700, 10))
     if player.lives == 0:
         screen.draw.text("Game Over", fontsize = 100, color = "orange", center = (400, 300))
     
@@ -63,6 +73,7 @@ def move_fence():
     fence.x = fence.x - 10
     if fence.x < -200:
         fence.x = 1000
+        player.score = player.score + 1
 
 def move_grass():   
     grass.x = grass.x - 5
