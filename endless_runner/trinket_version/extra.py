@@ -1,3 +1,3 @@
-import pgzero
+import pgzrun
 
-pgzero.runner.loaders.images = pgzero.runner.loaders.ImageLoader('')
+pgzrun.sys.modules['__main__'].__dict__['images'].subpath = ''
