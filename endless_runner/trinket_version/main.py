@@ -23,6 +23,8 @@ coin.pos = 40, 30
 heart = Actor("heart")
 heart.pos = 760, 30
 
+music.play("retrobeat")
+
 def draw():
     screen.blit("snow", (0, 0)) # draw the background to the screen (top-left corner at 0, 0) 
     cloud.draw()
@@ -55,6 +57,9 @@ def update():
 def jump():
     # We're jumping!
     player.y = player.y - player.jump
+    # Remember at the start we set player.jump to 30
+    if player.jump == 30:
+        sounds.jump.play()
     # Now we will make player.jump smaller
     # so the jump won't go on forever if you hold down space.
     if player.jump > 0:
