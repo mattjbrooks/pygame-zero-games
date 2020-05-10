@@ -91,7 +91,6 @@ def check_for_collision():
     # if player has collided with the center of the fence and isn't a ghost
     if player.collidepoint(fence.center) and player.image == "player":
         player.lives = player.lives - 1
-        sounds.rumble.play()
         player.image = "ghost" # change player's image to a transparent ghost
         clock.schedule(change_back, 1) # schedule change_back to run 1 second from now
 
