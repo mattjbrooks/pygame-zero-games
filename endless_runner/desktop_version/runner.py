@@ -11,7 +11,7 @@ cloud = Actor("cloud")
 cloud.pos = 1000, 100 # this is the same as setting cloud.x = 1000 and cloud.y = 100
 
 fence = Actor("fence")
-fence.pos = 1000, 500
+fence.pos = 1500, 500
 
 grass = Actor("grass")
 grass.pos = 800, 525
