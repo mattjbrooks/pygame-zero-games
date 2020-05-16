@@ -51,7 +51,7 @@ def update():
         move_cloud()
         move_fence()
         move_grass()
-        game_gravity()
+        move_player_down()
         check_for_collision()
 
 def jump():
@@ -81,7 +81,7 @@ def move_grass():
     if grass.x < -100:
         grass.x = 800
 
-def game_gravity():
+def move_player_down():
     if player.y < 500: # if player is in the air
         player.y = player.y + 10 # move them down 10 pixels
     else:
