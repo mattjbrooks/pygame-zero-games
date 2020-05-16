@@ -56,8 +56,7 @@ def update():
         check_for_collision()
 
 def jump():
-    # We're jumping!
-    # Remember at the start we set player.jump to 30
+    player.y = player.y - player.jump # We're jumping!
     if player.jump == 30:
         sounds.jump.play()
     player.y = player.y - player.jump
