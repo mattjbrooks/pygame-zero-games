@@ -46,7 +46,7 @@ def update():
         elif keyboard.right:
             player.x = player.x + 5 # a shorter way of writing this if you prefer is
                                     # player.x += 5
-        if keyboard.space: # not elif as we may want to move left or right and jump at same time
+        if keyboard.space: # not elif as we may want to move left or right and jump at the same time
             jump()
         move_cloud()
         move_fence()
